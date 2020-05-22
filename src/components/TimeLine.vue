@@ -1,23 +1,25 @@
 <template>
 <div class="timeline-wrapper">
-    <li v-for="(item,index) in lista" :key="item.id" class="timeline-item">
-        <div class="fecha float-left">
-            <span style="display:none">{{index}}</span>
-            {{item.fecha}}
-        </div>
-        <div class="suceso">
-            <div class="card">
-            <div class="card-header">
-                {{item.title}}
-            </div>
-            <div class="card-body">
-                {{item.content}}
-                <TimeLineItem :url="item.url" />
-            </div>
-            </div>
-            <br>
-        </div>
-    </li>
+    <transition-group name="tg-timeline" key="cpsa" tag="div">
+      <li v-for="(item,index) in listaOrdenada" v-bind:key="index" class="timeline-item">
+          <div class="fecha float-left">
+              <span style="display:none">{{index}}</span>
+              {{item.fecha}}
+          </div>
+          <div class="suceso">
+              <div class="card">
+              <div class="card-header">
+                  {{item.title}}
+              </div>
+              <div class="card-body">
+                  {{item.content}}
+                  <TimeLineItem :url="item.url" />
+              </div>
+              </div>
+              <br>
+          </div>
+      </li>
+    </transition-group>
 </div>    
 </template>
 <script>
@@ -29,12 +31,32 @@ export default {
     components: {
       TimeLineItem
     },
-    async created(){
-    
+    computed: {
+    listaOrdenada: function(){
+      let res = this.lista
+      return res.sort((a,b)=> {
+        let fechaA = new Date(a.fecha)
+        let fechaB = new Date(b.fecha)
+        return fechaA.getTime() > fechaB.getTime() ? 1 : -1
+      })
     }
+  }
 }
 </script>
 <style lang="scss" scoped>
+.tg-timeline-enter{
+  // background: red;
+  opacity: 0;
+  transform: translateX(100px);
+}
+.tg-timeline-enter-active{
+  transition: 1s all ease-in-out;
+}
+.tg-timeline-enter-to{
+  // background: blue;
+  opacity: 1;
+  transform: translateX(0px);
+}
 .float-right{
   float: right;
   text-align: left;

@@ -4,7 +4,7 @@
       <!-- <img alt="Vue logo" src="../assets/timeline.svg"> -->
       <h1>Timeline</h1>
     </div>
-    <TimeLine :lista="listaOrdenada"/>
+    <TimeLine :lista="lista"/>
     <Form :lista="lista"/>
   </div>
 </template>
@@ -23,7 +23,6 @@ img{
 </style>
 
 <script>
-import axios from 'axios'
 import TimeLine from '@/components/TimeLine'
 import Form from '@/components/Form'
 export default {
@@ -48,30 +47,6 @@ export default {
       ]
     }
   },
-  created(){
-    console.log("from created ")
-     axios.defaults.headers = {
-         'Access-Control-Allow-Origin': '*',
-         'Access-Control-Allow-Credentials': true
-    }
-
-    // axios.get(
-    // 'https://www.la-razon.com/nacional/2020/05/22/testigo-clave-dice-que-un-intermediario-espanol-tenia-contacto-directo-con-navajas/'
-
-    // )
-    //     .then(response => console.log(response))
-    //     .catch( error => console.log({text:'error',error}))
-  },
-
-  computed: {
-    listaOrdenada: function(){
-      let res = this.lista
-      return res.sort((a,b)=> {
-        let fechaA = new Date(a.fecha)
-        let fechaB = new Date(b.fecha)
-        return fechaA.getTime() > fechaB.getTime() ? 1 : -1
-      })
-    }
-  }
+  
 }
 </script>
