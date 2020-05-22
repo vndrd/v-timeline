@@ -5,6 +5,7 @@
       <h1>Timeline</h1>
     </div>
     <TimeLine :lista="lista"/>
+    <Form :lista="lista"/>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -25,10 +26,12 @@ img{
 // @ is an alias to /src
 
 import TimeLine from '@/components/TimeLine'
+import Form from '@/components/Form'
 export default {
   name: 'Home',
   components: {
-    TimeLine
+    Form,
+    TimeLine,
   },
   data(){
     return {
