@@ -23,8 +23,7 @@ img{
 </style>
 
 <script>
-// @ is an alias to /src
-
+import axios from 'axios'
 import TimeLine from '@/components/TimeLine'
 import Form from '@/components/Form'
 export default {
@@ -36,13 +35,34 @@ export default {
   data(){
     return {
       lista: [
-        {id : 1 , title: 'Titulo 1', content: 'contenido 1' , fecha:'2020-05-01'},
-        {id : 2 , title: 'Titulo 2', content: 'contenido 2' , fecha:'2020-05-02'},
+        {id : 1 , 
+          title: 'Humerez: intermediario español tenía contacto directo con Navajas',
+          url: 'https://www.la-razon.com/nacional/2020/05/22/testigo-clave-dice-que-un-intermediario-espanol-tenia-contacto-directo-con-navajas/',
+          content: 'contenido 1' , fecha:'2020-05-01',},
+        {id : 2 , title: 'Más de un Millon de dólares por comisión', 
+          content: 'contenido 2' , 
+          url: 'https://eldeber.com.bo/180301_tres-intermediarios-iban-a-cobrar-mas-de-un-millon-de-dolares-de-comision-por-los-respiradores',
+          fecha:'2020-05-02'},
         {id : 3 , title: 'Titulo 3', content: 'contenido 3' , fecha:'2020-05-03'},
         {id : 4 , title: 'Titulo 4', content: 'contenido 4' , fecha:'2020-05-04'},
       ]
     }
   },
+  created(){
+    console.log("from created ")
+     axios.defaults.headers = {
+         'Access-Control-Allow-Origin': '*',
+         'Access-Control-Allow-Credentials': true
+    }
+
+    // axios.get(
+    // 'https://www.la-razon.com/nacional/2020/05/22/testigo-clave-dice-que-un-intermediario-espanol-tenia-contacto-directo-con-navajas/'
+
+    // )
+    //     .then(response => console.log(response))
+    //     .catch( error => console.log({text:'error',error}))
+  },
+
   computed: {
     listaOrdenada: function(){
       let res = this.lista

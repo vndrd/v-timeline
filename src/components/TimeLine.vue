@@ -12,6 +12,7 @@
             </div>
             <div class="card-body">
                 {{item.content}}
+                <TimeLineItem :url="item.url" />
             </div>
             </div>
             <br>
@@ -20,9 +21,17 @@
 </div>    
 </template>
 <script>
+import TimeLineItem from '@/components/TimeLineItem'
+
 export default {
     name: 'TimeLine',
     props: ['lista'],
+    components: {
+      TimeLineItem
+    },
+    async created(){
+    
+    }
 }
 </script>
 <style lang="scss" scoped>
