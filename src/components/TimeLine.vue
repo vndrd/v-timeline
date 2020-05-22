@@ -97,23 +97,27 @@ export default {
 /*timeline*/
 
 .fecha::after{
+  /* circulo */
   position:absolute;
   right: 0;
-  transform: translateX(4px);
+  transform: translateX(6px);
   width: 10px;
   height: 10px;
+  z-index: 9999;
   background: #844;
-  border: #a66 1px solid;
+  border: #fff 3px solid;
   border-radius: 10px;
   content:'';
 }
 .fecha::before{
+  /* linea */
   position:absolute;
   z-index: 9999;
   right: 0;
   width: 4px;
   transform: translateY(15px);
-  height: calc(90%);
+  
+  height: calc(100%);
   background: #8446;
   content:'';
 }

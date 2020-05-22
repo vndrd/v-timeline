@@ -5,6 +5,8 @@
             <input type="date" name="fecha" v-model="fecha">    
         <label for="">Titulo</label>
             <input type="text" name="title" v-model="title">    
+        <label for="">Url</label>
+            <input type="text" name="url" v-model="url">    
         <label for="">Contenido</label>
             <textarea name="content"
             v-model="content" id="" cols="30" rows="5"></textarea>
@@ -21,6 +23,7 @@ export default {
             title: '',
             content: '',
             fecha: '20.05.2020',
+            url: '',
         }
     },
     methods: {
@@ -30,8 +33,8 @@ export default {
                 title: this.title,
                 content: this.content,
                 fecha: this.fecha,
+                url: this.url,
             }
-            console.log({text: 'objeitiot',obj})
             this.lista.push(obj)
         }
     }
@@ -76,8 +79,7 @@ button {
     box-shadow: 0 0 0 0.2rem rgba($color: #448, $alpha: .8);
 }
 button:hover,button:focus,button:active{
-    
     outline: none !important;
-        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .5);;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .5);;
 }
 </style>
