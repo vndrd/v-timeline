@@ -4,7 +4,7 @@
       <!-- <img alt="Vue logo" src="../assets/timeline.svg"> -->
       <h1>Timeline</h1>
     </div>
-    <TimeLine :lista="lista"/>
+    <TimeLine :lista="listaOrdenada"/>
     <Form :lista="lista"/>
   </div>
 </template>
@@ -36,11 +36,21 @@ export default {
   data(){
     return {
       lista: [
-        {id : 1 , title: 'Titulo 1', content: 'contenido 1' , fecha:'01.05.20'},
-        {id : 2 , title: 'Titulo 2', content: 'contenido 2' , fecha:'02.05.20'},
-        {id : 3 , title: 'Titulo 3', content: 'contenido 3' , fecha:'03.05.20'},
-        {id : 4 , title: 'Titulo 4', content: 'contenido 4' , fecha:'04.05.20'},
+        {id : 1 , title: 'Titulo 1', content: 'contenido 1' , fecha:'2020-05-01'},
+        {id : 2 , title: 'Titulo 2', content: 'contenido 2' , fecha:'2020-05-02'},
+        {id : 3 , title: 'Titulo 3', content: 'contenido 3' , fecha:'2020-05-03'},
+        {id : 4 , title: 'Titulo 4', content: 'contenido 4' , fecha:'2020-05-04'},
       ]
+    }
+  },
+  computed: {
+    listaOrdenada: function(){
+      let res = this.lista
+      return res.sort((a,b)=> {
+        let fechaA = new Date(a.fecha)
+        let fechaB = new Date(b.fecha)
+        return fechaA.getTime() > fechaB.getTime() ? 1 : -1
+      })
     }
   }
 }

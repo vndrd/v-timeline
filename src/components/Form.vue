@@ -1,11 +1,12 @@
 <template>
 <div class="form-container">
     <form @submit="submitForm">
+        <label for="">Fecha</label>
+            <input type="date" name="fecha" v-model="fecha">    
         <label for="">Titulo</label>
-        <input type="text" name="title"
-            v-model="title">    
+            <input type="text" name="title" v-model="title">    
         <label for="">Contenido</label>
-        <textarea name="content"
+            <textarea name="content"
             v-model="content" id="" cols="30" rows="5"></textarea>
         <button type="submit">Agregar</button>
     </form>    
