@@ -51,7 +51,8 @@ export default {
 .tg-timeline-enter{
   // background: red;
   opacity: 0;
-  transform: translateX(100px);
+  transform: translateX(100px) scaleY(0);
+
 }
 .tg-timeline-enter-active{
   transition: 1s all ease-in-out;
@@ -59,7 +60,8 @@ export default {
 .tg-timeline-enter-to{
   // background: blue;
   opacity: 1;
-  transform: translateX(0px);
+  transform: translateX(0px) scaleY(1);
+  
 }
 .float-right{
   float: right;
@@ -118,6 +120,7 @@ li.timeline-item{
 }
 .card-header {
   position:relative;
+  min-height: 20px;
   color: #fff;
   padding:10px;
   background: #844;

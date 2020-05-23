@@ -55,10 +55,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 .container-item{
+    border-top: white 5px solid;
     overflow: hidden;
-    border: 5px solid #aaa;
-    border-radius: 10px;
-    margin: 10px;
+    border-radius: 0 0 10px 10px;
     background: #888;
 }
 .container-img img {
@@ -84,7 +83,7 @@ export default {
     z-index: 99999;
     overflow: hidden;
     text-overflow: ellipsis; 
-     white-space: nowrap; 
+    white-space: nowrap; 
 }
 p{
     color: #fff;
