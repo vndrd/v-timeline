@@ -5,7 +5,7 @@
       <h1>Timeline</h1>
     </div>
     <TimeLine :lista="getNoticias"/>
-    <Form />
+    <!-- <Form /> -->
   </div>
 </template>
 <style lang="scss" scoped>
@@ -25,12 +25,12 @@ img{
 </style>
 <script>
 import TimeLine from '@/components/Alternativa/TimeLine'
-import Form from '@/components/Form'
+// import Form from '@/components/Form'
 import { mapGetters} from 'vuex'
 export default {
   name: 'About',
   components: {
-    Form,
+    // Form,
     TimeLine,
   },
   computed: {
