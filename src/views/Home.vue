@@ -19,9 +19,7 @@ img{
   width: 100%;
   transform: rotate(135deg);
 }
-
 </style>
-
 <script>
 import TimeLine from '@/components/TimeLine'
 import Form from '@/components/Form'

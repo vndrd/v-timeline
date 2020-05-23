@@ -1,7 +1,9 @@
 <template>
     <div class="container-item">
         <a :href="data.url">
-            <img v-if="imagen" :src="data.image.url" alt="qwe" width="100%">
+            <div class="container-img" :data-publiser="data.publisher">
+                <img v-if="imagen" :src="data.image.url" alt="qwe">
+            </div>
             <p>{{data.description}}</p> 
         </a>
     </div>    
@@ -58,7 +60,31 @@ export default {
     border-radius: 10px;
     margin: 10px;
     background: #888;
-
+}
+.container-img img {
+    width: 100%;
+}
+.container-img {
+    max-height: 150px;
+    overflow: hidden;
+    position:relative;
+}
+.container-img::after{
+    content: attr(data-publiser);
+    font-size: .9rem;
+    width: 100%;
+    height: 20px;
+    position:absolute;
+    bottom: 0;
+    left:0;
+    padding-left: 10px ;
+    padding-right: 10px ;
+    color: white;
+    background: rgba($color: #333, $alpha: .8) ;
+    z-index: 99999;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+     white-space: nowrap; 
 }
 p{
     color: #fff;
@@ -68,5 +94,8 @@ p{
 }
 a {
     text-decoration: none;
+}
+a:hover{
+    opacity: .8;
 }
 </style>
