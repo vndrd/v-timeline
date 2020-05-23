@@ -1,7 +1,9 @@
 <template>
     <div class="container-item">
-        <img v-if="imagen" :src="data.image.url" alt="qwe" width="100%" >
-        <p>{{data.description}}</p>        
+        <a :href="data.url">
+            <img v-if="imagen" :src="data.image.url" alt="qwe" width="100%">
+            <p>{{data.description}}</p> 
+        </a>
     </div>    
 </template>
 <script>
@@ -19,17 +21,24 @@ export default {
         }
     },
     async mounted() {
-        if(this.url){
-                console.log("mounted : "+this.url)
-                const { status, data } = await mql(this.url, {
+        let validURL= function (str) {
+            let pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+            '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+            '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+            '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+            '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+            '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+            return !!pattern.test(str);
+        }
+        if(validURL(this.url)){
+            const { status, data } = await mql(this.url, {
                 video: true,
                 audio:true,
                 palette: true,
                 iframe: true,
             })
-                this.status = status
-                this.data = data
-                await console.log({text:'from main js',status,data})
+            this.status = status
+            this.data = data
         }
     },
     computed: {
@@ -49,11 +58,15 @@ export default {
     border-radius: 10px;
     margin: 10px;
     background: #888;
+
 }
 p{
     color: #fff;
     padding: 0 10px;
     font-size: .8rem;
     text-align: left;
+}
+a {
+    text-decoration: none;
 }
 </style>

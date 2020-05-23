@@ -4,8 +4,8 @@
       <!-- <img alt="Vue logo" src="../assets/timeline.svg"> -->
       <h1>Timeline</h1>
     </div>
-    <TimeLine :lista="lista"/>
-    <Form :lista="lista"/>
+    <TimeLine :lista="getNoticias"/>
+    <Form />
   </div>
 </template>
 <style lang="scss" scoped>
@@ -25,11 +25,15 @@ img{
 <script>
 import TimeLine from '@/components/TimeLine'
 import Form from '@/components/Form'
+import { mapGetters} from 'vuex'
 export default {
   name: 'Home',
   components: {
     Form,
     TimeLine,
+  },
+  computed: {
+    ...mapGetters(['getNoticias'])
   },
   data(){
     return {

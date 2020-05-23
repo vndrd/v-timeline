@@ -15,9 +15,9 @@
 </div>    
 </template>
 <script>
+import { mapActions } from 'vuex'
 export default {
     name: 'Form',
-    props: ['lista'],
     data(){
         return {
             title: '',
@@ -27,6 +27,7 @@ export default {
         }
     },
     methods: {
+        ...mapActions(['addNoticia']),
         submitForm(e){
             e.preventDefault()
             let obj = {
@@ -35,7 +36,7 @@ export default {
                 fecha: this.fecha,
                 url: this.url,
             }
-            this.lista.push(obj)
+            this.addNoticia(obj)
         }
     }
 }

@@ -1,7 +1,7 @@
 <template>
 <div class="timeline-wrapper">
-    <transition-group name="tg-timeline" key="cpsa" tag="div">
-      <li v-for="(item,index) in listaOrdenada" v-bind:key="index" class="timeline-item">
+    <transition-group name="tg-timeline" tag="div">
+      <li v-for="(item,index) in lista" v-bind:key="index" class="timeline-item">
           <div class="fecha float-left">
               <span style="display:none">{{index}}</span>
               {{item.fecha}}
@@ -12,7 +12,8 @@
                   {{item.title}}
               </div>
               <div class="card-body">
-                  {{item.content}}
+                  <!-- {{item.content}} -->
+                  .
                   <TimeLineItem :url="item.url" />
               </div>
               </div>
@@ -31,8 +32,11 @@ export default {
     components: {
       TimeLineItem
     },
+    methods:{ 
+      
+    },
     computed: {
-    listaOrdenada: function(){
+    listaOrdenadaComputed: function(){
       let res = this.lista
       return res.sort((a,b)=> {
         let fechaA = new Date(a.fecha)
@@ -67,9 +71,17 @@ export default {
   padding-left: 100px;
   background: #aaa;
 }
-.timeline-item{  
+.time-line-wrapper {
+  display: flex;
+  justify-content: center;
+}
+li.timeline-item{  
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   position: relative;
+  // background: yellow;
+  width: 80%;
   // alinear
   justify-content: center;
 }
@@ -77,14 +89,14 @@ export default {
   // background: #449;
   margin-bottom: 20px;
   padding: 10px;
-  width: 20%;
+  width: 30%;
 }
 .fecha{
   color: #aaa;
   font-weight: 800;
   background: white;
   padding: 10px;
-  width: 20%;
+  width: 30%;
   position: relative;
   
 }
@@ -137,17 +149,20 @@ export default {
   z-index: 9999;
   right: 0;
   width: 4px;
-  transform: translateY(15px);
-  
+  transform: translateY(15px);  
   height: calc(100%);
   background: #8446;
   content:'';
 }
-.fecha::before:nth-last-child(){
+.timeline-item:last-child .fecha::before{
+  /* linea */
   position:absolute;
-  right: -6px;
-  width: 2px;
-  background: black;
+  z-index: 9999;
+  right: 0;
+  width: 4px;
+  transform: translateY(15px);  
+  height: calc(60%);
+  background: #8446;
   content:'';
 }
 </style>
