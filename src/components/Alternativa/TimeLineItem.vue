@@ -8,7 +8,7 @@
                     {{title}}
                 </p>
                 <p v-else>
-                    {{data.description}}
+                    {{data.title}}
                 </p> 
             </a>
     </div>    
@@ -45,7 +45,7 @@ export default {
                 palette: true,
                 iframe: true,
             })
-            console.log({data})
+            console.log({data,title: data.title})
             this.status = status
             this.data = data
         }
@@ -86,6 +86,7 @@ p{
     width: 420px;
     font-size: 1.1rem;
     z-index: 3;
+    font-weight: 800;
 }
 a {
     color: none;

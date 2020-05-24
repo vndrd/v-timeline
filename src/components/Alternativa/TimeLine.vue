@@ -169,7 +169,7 @@ li.timeline-item{
     position: absolute;
     content: '';
     width: 5px;
-    height: calc(80%);
+    height: calc(100% - 200px);
     left: calc(50%);
     top:0;
     transform: translateX(-3px) translateY(20px);
