@@ -8,31 +8,39 @@
             <button type="submit" @click="cargarUrl">Cargar url</button>
         </form>
         <p v-if="resultado">{{resultado}}</p>
-        <div class="busqueda" v-if="busqueda">
-            <li>status: {{dt.status}}</li>
-            <li>date: {{dt.data.date}}</li>            
-            <li>author: {{dt.data.author}}</li>            
-            <li>publisher: {{dt.data.publisher}}</li>            
-            <li>url: {{dt.data.url}}</li>            
-            <li>title: {{dt.data.title}}</li>            
-            <li>description: {{dt.data.description}}</li>            
-            <li>lang: {{dt.data.lang}}</li>
-            <li>image: {{dt.data.image}}</li>            
-            <li>logo: {{dt.data.logo}}</li>            
-            <li>audio: {{dt.data.audio? 'Si':'No'}}
+        <p>status: {{dt.status}}</p>
+        <div class="busqueda" v-if="dt.status">
+            <li><span>title:</span> {{dt.data.title}}</li>            
+            <li><span>publisher:</span> {{dt.data.publisher}}</li>            
+            <li><span>author:</span> {{dt.data.author}}</li>            
+            <li><span>description:</span> {{dt.data.description}}</li>            
+            <li><span>date:</span> {{dt.data.date}}</li>            
+            <li><span>lang:</span> {{dt.data.lang}}</li>
+            <li><span>url:</span> {{dt.data.url}}</li>            
+            <li><span>image:</span> {{dt.data.image}}</li>            
+            <li><span>logo:</span> {{dt.data.logo}}</li>            
+            <li><span>audio:</span> {{dt.data.audio? 'Si':'No'}}
                 <ul>
-                    <li v-for="(value, name) in dt.data.audio" :key="value">
+                    <li v-for="(value, name) in dt.data.audio" :key="value+name">
                         {{ name }}: {{ value }}
                     </li>
                 </ul>
             </li>    
-            <li>video: {{dt.data.video? 'Si':'No'}}
+            <li><span>video:</span> {{dt.data.video? 'Si':'No'}}
                 <ul>
-                    <li v-for="(value, name) in dt.data.video" :key="value">
+                    <li v-for="(value, name) in dt.data.video" :key="value+name">
+                        {{ name }}: {{ value }}
+                    </li>
+                </ul>
+            </li>   
+            <li><span>iframe:</span> {{dt.data.iframe? 'Si':'No'}}
+                <ul>
+                    <li v-for="(value, name) in dt.data.iframe" :key="value+name">
                         {{ name }}: {{ value }}
                     </li>
                 </ul>
             </li>                
+            
         </div>
         <div v-if="isProcesing">
             Procesando
@@ -44,7 +52,7 @@
 </template>
 <script>
 const mql = require('@microlink/mql')
-
+//👎
 export default {
     name: 'Formulario',
     data(){
@@ -65,6 +73,7 @@ export default {
     methods: {
         cargarUrl: async function(e){
             e.preventDefault()
+            this.dt.status= false;
             let isValidURL= function (str) {
                 let pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
                 '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
@@ -132,6 +141,9 @@ input {
     margin: 2px;
     background: white;
     text-align: left;
+}
+.busqueda li span {
+    font-weight: 800;
 }
 button{
     padding: 20px;
