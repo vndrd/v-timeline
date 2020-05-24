@@ -1,7 +1,7 @@
 <template>
 <div class="timeline-wrapper">
     <transition-group name="tg-timeline" tag="div">
-      <li v-for="(item,index) in lista" v-bind:key="index" class="timeline-item">
+      <li v-for="(item,index) in listaOrdenadaComputed" v-bind:key="index" class="timeline-item">
           <div :class="index%2==0? 'derecha':'izquierda'" class="suceso" >
               <div class="circulo"></div>
               <div class="fecha">

@@ -16,9 +16,8 @@ const state = {
             url: 'https://www.opinion.com.bo/articulo/pais/anez-entrega-primeros-170-respiradores-500-anunciados-abril/20200514223822767725.html'},
         {id : 8 , title: 'Ministro de Salud, Marcelo Navajas, admite que equipos son sólo para emergencias.', content: '', fecha:'2020-05-15',
             url: 'https://eldeber.com.bo/179346_los-respiradores-que-compro-el-gobierno-no-son-aptos-para-terapia-intensiva'},
-
-            
-        
+        {id : 9 , title: 'Embajador de Ciencia y Tecnología anuncia 500 respiradores', content: '', fecha:'2020-04-01',
+                url: 'https://www.facebook.com/jeanineanezc/videos/mohammed-mostajo-radji-nuestro-embajador-de-ciencia-tecnolog%C3%ADa-e-innovaci%C3%B3n-nos-/527139861552483/'},        
     ]
 }
 const getters = {

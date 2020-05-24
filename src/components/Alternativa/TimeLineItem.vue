@@ -1,16 +1,16 @@
 <template>
     <div class="container-item">
-        <a :href="data.url">
-            <div class="container-img" >
+            <a :href="data.url" class="link">
+        <div class="container-img" >
                 <img v-if="imagen" :src="data.image.url">
+        </div>
                 <p v-if="title">
                     {{title}}
                 </p>
                 <p v-else>
                     {{data.description}}
                 </p> 
-            </div>
-        </a>
+            </a>
     </div>    
 </template>
 <script>
@@ -45,6 +45,7 @@ export default {
                 palette: true,
                 iframe: true,
             })
+            console.log({data})
             this.status = status
             this.data = data
         }
@@ -73,6 +74,7 @@ export default {
     position:relative;
     overflow: hidden;
     height: 300px;
+    z-index: 2;
 }
 p{
     background: rgba($color: #000000, $alpha: .9);
@@ -83,16 +85,17 @@ p{
     text-align: justify;
     width: 420px;
     font-size: 1.1rem;
+    z-index: 3;
 }
 a {
     color: none;
     text-decoration: none;
 }
-a:hover{
-    opacity: .8;
-    p {
-        transition: 1s all ease-in-out;
-        transform: translateY(40px);
-    }
+img:hover{
+    opacity: .8 !important;
+    // p {
+    //     transition: 1s all ease-in-out;
+    //     transform: translateY(40px);
+    // }
 }
 </style>
