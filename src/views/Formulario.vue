@@ -9,7 +9,30 @@
         </form>
         <p v-if="resultado">{{resultado}}</p>
         <div class="busqueda" v-if="busqueda">
-
+            <li>status: {{dt.status}}</li>
+            <li>date: {{dt.data.date}}</li>            
+            <li>author: {{dt.data.author}}</li>            
+            <li>publisher: {{dt.data.publisher}}</li>            
+            <li>url: {{dt.data.url}}</li>            
+            <li>title: {{dt.data.title}}</li>            
+            <li>description: {{dt.data.description}}</li>            
+            <li>lang: {{dt.data.lang}}</li>
+            <li>image: {{dt.data.image}}</li>            
+            <li>logo: {{dt.data.logo}}</li>            
+            <li>audio: {{dt.data.audio? 'Si':'No'}}
+                <ul>
+                    <li v-for="(value, name) in dt.data.audio" :key="value">
+                        {{ name }}: {{ value }}
+                    </li>
+                </ul>
+            </li>    
+            <li>video: {{dt.data.video? 'Si':'No'}}
+                <ul>
+                    <li v-for="(value, name) in dt.data.video" :key="value">
+                        {{ name }}: {{ value }}
+                    </li>
+                </ul>
+            </li>                
         </div>
         <div v-if="isProcesing">
             Procesando
@@ -27,7 +50,7 @@ export default {
     data(){
         return {
             form: {
-                url: '1',
+                url: 'https://genius.com/Ed-sheeran-perfect-lyrics',
                 isProcesing: false,
             },
             dt: {
@@ -36,6 +59,7 @@ export default {
             },
             resultado: '',
             busqueda: false,
+            isProcesing: false,
         }
     },
     methods: {
@@ -54,7 +78,7 @@ export default {
                 this.resultado = 'Url-String Válido'
                 this.busqueda = true
                 this.isProcesing = true;
-                const { status, data } = await mql(this.url, {
+                const { status, data } = await mql(this.form.url, {
                     video: true,
                     audio:true,
                     palette: true,
@@ -102,6 +126,12 @@ input {
 .busqueda {
     width: 100%;
     background: yellow; //colorDivs
+}
+.busqueda li{
+    padding:5px;
+    margin: 2px;
+    background: white;
+    text-align: left;
 }
 button{
     padding: 20px;
