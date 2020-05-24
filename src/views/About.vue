@@ -9,6 +9,10 @@
   </div>
 </template>
 <style lang="scss" scoped>
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+}
 .img-cont{
   width: 200px;
   height: auto;
@@ -24,6 +28,7 @@ img{
 }
 </style>
 <script>
+
 import TimeLine from '@/components/Alternativa/TimeLine'
 // import Form from '@/components/Form'
 import { mapGetters} from 'vuex'

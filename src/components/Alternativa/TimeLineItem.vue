@@ -1,10 +1,12 @@
 <template>
     <div class="container-item">
         <a :href="data.url">
-            <div class="container-img" :data-publiser="data.publisher">
-                <img v-if="imagen" :src="data.image.url" alt="qwe">
+            <div class="container-img" >
+                <img v-if="imagen" :src="data.image.url">
+                <p>
+                    {{data.description}}
+                </p> 
             </div>
-            <p>{{data.description}}</p> 
         </a>
     </div>    
 </template>
@@ -12,7 +14,7 @@
 const mql = require('@microlink/mql')
 export default {
     name: 'TimeLineItem',
-    props: ['url'],
+    props: ['url','index'],
     data() {
         return {
             description: '',
@@ -23,6 +25,7 @@ export default {
         }
     },
     async mounted() {
+        console.log({...this.index})
         let validURL= function (str) {
             let pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
             '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
@@ -44,6 +47,7 @@ export default {
         }
     },
     computed: {
+        indexComputed: function() { return this.index},
         imagen: function(){
             if(this.data.image){
                 return this.data.image.url
@@ -55,36 +59,36 @@ export default {
 </script>
 <style lang="scss" scoped>
 .container-item{
-    border-radius: 0 0 10px 10px;
-    background: #888;
+    background: #aaa;
 }
 .container-img img {
     width: 100%;
-    float: left;
 }
 .container-img {
-    width: 120px;
-    
-    float: left;
+    display: block;
+    width: auto;
+    position:relative;
+    overflow: hidden;
 }
 p{
-    width: 140px;
-    height: 100px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translateX(80px) translateY(-39px);
-    color: #fff;
-    background: #888;
-    padding: 10px;
-    font-size: .8rem;
-    text-align: left;
+    background: rgba($color: #000000, $alpha: .9);
+    position:absolute;
+    bottom: -15px;
+    color: white;
+    padding: 15px 15px;
+    text-align: justify;
+    width: auto;
+    font-size: 1.1rem;
 }
 a {
+    color: none;
     text-decoration: none;
-    position:relative;
 }
 a:hover{
     opacity: .8;
+    p {
+        transition: 1s all ease-in-out;
+        transform: translateY(40px);
+    }
 }
 </style>

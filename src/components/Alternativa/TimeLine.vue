@@ -2,14 +2,16 @@
 <div class="timeline-wrapper">
     <transition-group name="tg-timeline" tag="div">
       <li v-for="(item,index) in lista" v-bind:key="index" class="timeline-item">
-          <div class="derecha suceso" v-if="index%2==0">
+          <div :class="index%2==0? 'derecha':'izquierda'" class="suceso" >
+              <div class="circulo"></div>
               <div class="fecha">
-                  {{item.fecha}}
+                  {{mesString(item.fecha)}}
               </div>
-          </div>
-          <div class="izquierda suceso" v-if="index%2==1">
-              <div class="fecha">
-                    {{item.fecha}}
+              <div class="titulo">
+                  
+              </div>
+              <div class="contenido">
+                  <TimeLineItem :url="item.url" :index="index"/>
               </div>
           </div>
       </li>
@@ -17,23 +19,47 @@
 </div>    
 </template>
 <script>
-// <div class="suceso">
-//               <div class="card">
-//                 <div class="card-header">May, 2</div>
-//                 <div class="card-body">
-//                     <TimeLineItem :url="item.url" />
-//                 </div>
-//               </div>
-//           </div>
-// import TimeLineItem from '@/components/Alternativa/TimeLineItem'
+import TimeLineItem from '@/components/Alternativa/TimeLineItem'
 export default {
     name: 'TimeLine',
     props: ['lista'],
     components: {
-    //   TimeLineItem
+      TimeLineItem
     },
     methods:{ 
-      
+        mesString(date){
+            let dateArr = date.split('-'),
+                mes = dateArr[1],
+                dia = parseInt( dateArr[2] )
+            switch (mes) {
+                case '01':
+                    return `ENE, ${dia}`;
+                case '02':
+                    return `FEB, ${dia}`;
+                case '03':
+                    return `MAR, ${dia}`;
+                case '04':
+                    return `ABR, ${dia}`;                                        
+                case '05':
+                    return `MAY, ${dia}`;                    
+                case '06':
+                    return `JUN, ${dia}`;
+                case '07':
+                    return `JUL, ${dia}`;
+                case '08':
+                    return `AGO, ${dia}`;
+                case '09':
+                    return `SEP, ${dia}`;                                        
+                case '10':
+                    return `OCT, ${dia}`;                    
+                case '11':
+                    return `NOV, ${dia}`;                                        
+                case '12':
+                    return `DIC, ${dia}`;                    
+                default:
+                    return '';
+            }
+        }
     },
     computed: {
     listaOrdenadaComputed: function(){
@@ -48,44 +74,55 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.contenido {
+    margin-top: 40px;
+    clear: both;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0rem 0rem 2rem 0rem #bbb;
+    overflow: hidden;
+}
 .fecha {
+    padding:5px;
     background: #484;
     color: white;
-    width: 150px;
+    width: 100px;
     height: 20px;
+    font-weight: 800;
+    font-size: 1.2rem;
+}   
+.izquierda .titulo, .izquierda .fecha{
+    float: right;
+}
+.derecha .titulo, .derecha .fecha{
+    float: left;
 }
 .suceso {
     margin:10px;
-    display: flex;
-    background: #c4c4c4;
-    width: 250px;
+    // ba   ckground: #c4c4c4;
+    width: calc(45%);
 }
-.derecha{
-    float: right;
-    
-    position:relative;
-    justify-content: start;
+.derecha .circulo{
+    left:0;
+    transform: translateX(-50px);
 }
-li.timeline-item::before{
+.izquierda .circulo{
+    right:0;
+    transform: translateX(50px);
+}
+.circulo {
+//circulo
     position: absolute;
-    content: '';
-    width: 5px;
-    height: calc(100%);
-    left: calc(50%);
-    top:0;
-    transform: translateX(-3px) translateY(15px);
-    background: #c4c4c4;
-}    
-li.timeline-item::after{
-    position: absolute;
-    content: '';
     width: 20px;
     height: 20px;
-    left: calc(50%);
-    transform: translateX(-10px) translateY(10px);
+    // transform: translateX(-10px) translateY(10px);
     top:0;
     background: #c4c4c4;
     border-radius: 10px;
+}
+.derecha{
+    float: right;
+    position:relative;
 }
 .izquierda{
     float: left;
@@ -97,10 +134,12 @@ li.timeline-item::after{
     transform: translateX(-30px);
 }
 .izquierda::after{
+    //triangulo der-IZQ
     right: 0;
     transform: translateX(30px) rotate(180deg);
 }
 .derecha::after , .izquierda::after{
+    //triangulo
     content: '';
     position: absolute;
     width:0px;
@@ -115,14 +154,26 @@ li.timeline-item{
     position: relative;
     height: 40px;
     list-style-type: none;
-    width: 600px;
-    background: #e5e5e5;    
+    width: 1000px;
+    // background: #e5e5e5;    
     margin-bottom: 10px;
 }
 .timeline-wrapper{
     display: flex;
     justify-content: center;
-    background: blue;
+    // background: blue;
+    position: relative;
+}
+.timeline-wrapper::after{
+    //linea
+    position: absolute;
+    content: '';
+    width: 5px;
+    height: calc(80%);
+    left: calc(50%);
+    top:0;
+    transform: translateX(-3px) translateY(20px);
+    background: #c4c4c4;
 }
 .tg-timeline-enter{
 
@@ -136,127 +187,6 @@ li.timeline-item{
 .tg-timeline-enter-to{
   // background: blue;
   opacity: 1;
-  transform: translateX(0px) scaleY(1);
-  
+  transform: translateX(0px) scaleY(1); 
 }
-// .float-right{
-//   float: right;
-//   text-align: left;
-// }
-// .float-left{
-//   float: left;
-//   text-align: right;
-//   padding-left: 100px;
-//   background: #aaa;
-// }
-// .time-line-wrapper {
-//   display: flex;
-//   justify-content: center;
-// }
-// li.timeline-item{  
-//   margin-left: auto;
-//   margin-right: auto;
-//   display: flex;
-//   position: relative;
-// //   background: yellow;
-//    margin-bottom: 10px;
-//   width: 80%;
-//   // alinear
-//   justify-content: center;
-// }
-// .suceso{
-//   // background: #449;
-//   padding: 10px;
-//   width: 30%;
-//   z-index: 7;
-//   position:relative;
-// }
-// .suceso::after{
-//     content: '';
-//     width: 250px;
-//     height: 140px;
-//     transform: translateX(60px);
-//     background: #c4c4c4;
-//     z-index: -1;
-//     position: absolute;
-//     top:0;
-//     left: 0;
-// }
-// .fecha{
-//   color: #aaa;
-//   font-weight: 800;
-//   background: white;
-//   padding: 10px;
-//   width: 30%;
-//   position: relative;
-  
-// }
-// .card{
-//   margin-left: 40px;
-//   background: #c4c4c4;
-//   min-height: 100px;
-// }
-// .card-header::after{
-// /* trinagulo */
-//   content:'';
-//   z-index: 9999;
-//   position: absolute;
-//   left: 0;
-//   top:0;
-//   border-top: 15px solid transparent;
-//   border-bottom: 15px solid transparent;
-//   border-left: 25px solid transparent;
-//   border-right: 25px solid #484;
-//   transform: translateX(-60px);
-// }
-// .card-header {
-//   position:relative;
-//   width: 100px;
-//   min-height: 20px;
-//   color: #fff;
-//   padding:10px;
-//   background: #484;
-// }
-
-// .card-body {
-//   background: #ddd;
-//   min-height: 80px;
-// }
-
-// /*timeline*/
-
-// .fecha::after{
-//   /* circulo */
-//   position:absolute;
-//   right: 0;
-//   transform: translateX(8px);
-//   width: 25px;
-//   height: 25px;
-//   z-index: 9999;
-//   background: #c4c4c4;
-//   border-radius: 25px;
-//   content:'';
-// }
-// .fecha::before{
-//   /* linea */
-//   position:absolute;
-//   z-index: 9999;
-//   right: 0;
-//   width: 6px;
-//   transform: translateY(15px);  
-//   height: calc(100%);
-//   background: #c4c4c4;
-//   content:'';
-// }
-// .timeline-item:last-child .fecha::before{
-//   /* linea */
-//   position:absolute;
-//   z-index: 9999;
-//   right: 0;
-//   width: 4px;
-//   transform: translateY(15px);  
-//   height: calc(60%);
-//   background: #8446;
-//   content:'';
-// }
 </style>
