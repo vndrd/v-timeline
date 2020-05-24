@@ -69,6 +69,7 @@ export default {
     width: auto;
     position:relative;
     overflow: hidden;
+    height: 300px;
 }
 p{
     background: rgba($color: #000000, $alpha: .9);
