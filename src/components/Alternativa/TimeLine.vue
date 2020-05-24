@@ -11,7 +11,7 @@
                   
               </div>
               <div class="contenido">
-                  <TimeLineItem :url="item.url" :index="index"/>
+                  <TimeLineItem :url="item.url" :title="item.title" />
               </div>
           </div>
       </li>

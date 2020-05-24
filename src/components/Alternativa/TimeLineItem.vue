@@ -3,7 +3,10 @@
         <a :href="data.url">
             <div class="container-img" >
                 <img v-if="imagen" :src="data.image.url">
-                <p>
+                <p v-if="title">
+                    {{title}}
+                </p>
+                <p v-else>
                     {{data.description}}
                 </p> 
             </div>
@@ -14,7 +17,7 @@
 const mql = require('@microlink/mql')
 export default {
     name: 'TimeLineItem',
-    props: ['url','index'],
+    props: ['url','title'],
     data() {
         return {
             description: '',
@@ -78,7 +81,7 @@ p{
     color: white;
     padding: 15px 15px;
     text-align: justify;
-    width: auto;
+    width: 420px;
     font-size: 1.1rem;
 }
 a {
